@@ -1,12 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
 
-//import dotenv
 import dotenv from 'dotenv';
-//ENV = qa npx playwright test
-const ENV = process.env.ENV || "qa";
-console.log('Running test in environment : ',ENV);
-dotenv.config({path:`config/.env.${ENV}`});
 
+//npm install dotenv
+//ENV=qa npx playwright test
+const ENV = process.env.ENV || "qa";
+console.log('Running tests on Environment: ', ENV);
+dotenv.config({ path: `config/.env.${ENV}` });
 
 export default defineConfig({
   testDir: './tests',
@@ -19,15 +19,20 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    baseURL : process.env.BASE_URL,
-    headless : false,
-    /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+
+
+  reporter: [['list'],
+              ['html',{outputFolder:"reports/html-report",open:"never"}],
+              ['allure-playwright',{outputFolder:"allure-results",suitetitle:true,}]
+
+],
+
+
+
+  use: {
+    baseURL: process.env.BASE_URL,
+    headless: false,
     trace: 'on-first-retry',
   },
 
@@ -38,15 +43,15 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
-    /*{
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },*/
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {
@@ -69,10 +74,5 @@ export default defineConfig({
     // },
   ],
 
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+
 });

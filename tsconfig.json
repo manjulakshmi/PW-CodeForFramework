@@ -1,35 +1,33 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "commonjs",
-    "lib": [
-      "ES2022",
-      "DOM"
+    "compilerOptions": {
+        "target": "ES2020",
+        "module": "es2022",
+        "moduleResolution": "bundler",
+        "lib": [
+            "ES2020",
+            "DOM"
+        ],
+        "types": [
+            "node"
+        ],
+        "strict": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "outDir": "./dist",
+        "skipLibCheck": true
+    },
+    "include": [
+        "src/**/*.ts",
+        "tests/**/*.ts",
+        "*.config.ts"
     ],
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "outDir": "./dist",
-    "rootDir": "./",
-    "sourceMap": true,
-    "declaration": false,
-    "types": [
-      "node"
+    "exclude": [
+        "node_modules",
+        "dist",
+        "reports",
+        "allure-results"
     ]
-  },
-  "include": [
-    "tests/**/*.ts",
-    "pages/**/*.ts",
-    "fixtures/**/*.ts",
-    "utils/**/*.ts",
-    "playwright.config.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "playwright-report",
-    "test-results"
-  ]
 }

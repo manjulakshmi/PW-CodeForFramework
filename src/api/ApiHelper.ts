@@ -1,12 +1,12 @@
 
-//request is coming from APIRequestContext
+
 import { APIRequestContext } from "@playwright/test";
 
 export class ApiHelper {
-//private variable
+
     private readonly request: APIRequestContext;
     private readonly baseURL: string;
-//initialize
+
     constructor(request: APIRequestContext, baseURL: string) {
         this.request = request;
         this.baseURL = baseURL;
@@ -15,11 +15,9 @@ export class ApiHelper {
     //helper methods:
 
     //GET
-//as inside class no need of function keyword
-//give endpoint and header(optional param and inform of keyvalue pair so use record)
     async get(endPoint: string, headers?: Record<string, string>) {
         let response = await this.request.get(`${this.baseURL}${endPoint}`, {
-            headers: headers   //pw=we need to pass header
+            headers: headers
         });
         console.log(await response.json(), response.status());
         return {
@@ -28,7 +26,7 @@ export class ApiHelper {
         }
     }
 
-    //POST, header,json data,ep should be passed
+    //POST
     async post(endPoint: string, data: object, headers?: Record<string, string>) {
         let response = await this.request.post(`${this.baseURL}${endPoint}`, {
             headers: headers,

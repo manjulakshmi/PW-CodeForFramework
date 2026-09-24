@@ -6,7 +6,7 @@ export class ShoppingCartPage extends BasePage
 {
 
 private readonly productMacBookPro : Locator;  
-private Readonly quantity :Locators;
+private readonly quantity :Locator;
 
 constructor(page:Page)
 {

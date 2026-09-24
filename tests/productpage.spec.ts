@@ -4,25 +4,24 @@ import { test, expect } from '../src/fixtures/pagefixtures';
 
 test.beforeEach(async ({ loginPage }) => {
     await loginPage.goToLoginPage();
-    await loginPage.doLogin(process.env.USERNAME, process.env.PASSWORD);
+    await loginPage.doLogin(process.env.USERNAME!, process.env.PASSWORD!);
 });
 
 
-test('verify product header', async ({ homePage, searchResultsPage, productInfoPage, page }) => {
+test('verify product header', async ({ homePage, searchResultsPage, productInfoPage }) => {
     await homePage.doSearch('macbook');
     await searchResultsPage.selectProduct('MacBook Pro');
     expect(await productInfoPage.getProductHeader()).toBe('MacBook Pro');
-    await page.pause();
 });
 
-test('verify product images count', async ({ homePage, searchResultsPage, productInfoPage, page }) => {
+test('verify product images count', async ({ homePage, searchResultsPage, productInfoPage }) => {
     await homePage.doSearch('macbook');
     await searchResultsPage.selectProduct('MacBook Pro');
     expect(await productInfoPage.getProductImagesCount()).toBe(4);
-    await page.pause();
 });
 
-test('verify product information/data', async ({ homePage, searchResultsPage, productInfoPage, page }) => {
+
+test('verify product information/data', async ({ homePage, searchResultsPage, productInfoPage }) => {
     await homePage.doSearch('macbook');
     await searchResultsPage.selectProduct('MacBook Pro');
 
@@ -41,4 +40,21 @@ test('verify product information/data', async ({ homePage, searchResultsPage, pr
     expect.soft(actualProductInfoMap.get('extaxprice')).toBe('$2,000.00');
 
     //await page.pause();
+});
+
+//common features test:
+test('App logo exists on Login Page', async ({ basePage }) => {
+    expect(await basePage.isLogoVisible()).toBeTruthy();
+});
+
+test('Search Box exists on Login Page', async ({ basePage }) => {
+    expect(await basePage.isSearchBoxVisible()).toBeTruthy();
+});
+
+test('Cart exists on Login Page', async ({ basePage }) => {
+    expect(await basePage.isCartButtonVisible()).toBeTruthy();
+});
+
+test('Footers exists on Login Page', async ({ basePage }) => {
+    expect(await basePage.getPageFootersCount()).toBe(16);
 });

@@ -11,8 +11,7 @@ export class ProductInfoPage extends BasePage {
     private readonly productMetaData: Locator;
     private readonly productPricing: Locator;
     private productInfoMap: Map<string, string | number>;
-    private readonly addToCartBtn : Locator;
-    private readonly shoppingCartLnk : Locator;
+
 
     //const... of the class....init the locators:
     constructor(page: Page) {
@@ -22,8 +21,6 @@ export class ProductInfoPage extends BasePage {
         this.productMetaData = page.locator('div#content ul.list-unstyled:nth-of-type(1) li');
         this.productPricing = page.locator('div#content ul.list-unstyled:nth-of-type(2) li');
         this.productInfoMap = new Map<string, string | number>();
-        this.addToCartBtn = page.getByRole('button',{name:'Add To Cart'});
-        this.shoppingCartLnk = page.getByRole('link',{name:'shopping cart'});
     }
 
 
@@ -69,20 +66,6 @@ export class ProductInfoPage extends BasePage {
         this.productInfoMap.set('productprice', productPrice);
         this.productInfoMap.set('extaxprice', exTaxPrice);
     }
-
-    //Adding item to cart
-    async addProductToCart():Promise<void>
-    {
-        await this.addToCartBtn.click();
-    }
-
-    //click on the link displyed after add to Cart
-    async clickOnShoppingCartLink():Promise<void>
-    {
-        await this.shoppingCartLnk.click();
-    }
-
-    
 
 
 }
