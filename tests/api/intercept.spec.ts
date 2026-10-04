@@ -22,7 +22,7 @@ test('intercept and log requests', async ({ page }) => {
 //mocking: fake data/response:
 
 
-test('@smoke mock search with fake JSON', async ({ page }) => {
+test('mock search with fake JSON', async ({ page }) => {
 
     //JS
     let fakeProducts = [
@@ -44,7 +44,7 @@ test('@smoke mock search with fake JSON', async ({ page }) => {
 });
 
 
-test('@smoke mock search page with fake HTML', async ({ page }) => {
+test('mock search page with fake HTML', async ({ page }) => {
 
     await page.route('**/index.php?route=product/search&search=macbook', async (route) => {
         await route.fulfill({
