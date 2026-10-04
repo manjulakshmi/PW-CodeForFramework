@@ -28,7 +28,7 @@ test('@regression forgot pwd link exist test', async ({ loginPage }) => {
     expect(await loginPage.isForgottenPwdLinkExist()).toBeTruthy();
 });
 
-test('@smoke user is able to login to app with valid credentials', async ({ loginPage, homePage }) => {
+test('@regression user is able to login to app with valid credentials', async ({ loginPage, homePage }) => {
 
     meta({ priority: 'P1', severity: 'blocker', owner: 'Manish', story: 'US102', epic: 'ep300', feature: 'F31', issue: 'bug35' });
     await testData({ username: process.env.USERNAME!, password: process.env.PASSWORD! }, 'Login');
@@ -55,7 +55,7 @@ test('@smoke user is able to login to app with valid credentials', async ({ logi
 
 
 //DD_0: using test data from fixtures: sequence run
-test(`@regression login to app with invalid credentials with fixture data`, async ({ loginPage, testData }) => {
+test(`login to app with invalid credentials with fixture data`, async ({ loginPage, testData }) => {
     for (let row of testData) {
         await loginPage.doLogin(row.username, row.password);
         expect(await loginPage.isInvalidLoginErrorDisplayed()).toBeTruthy();
@@ -69,7 +69,7 @@ test(`@regression login to app with invalid credentials with fixture data`, asyn
 //DD_1: read csv data directly fromn the CSV file and loop the test method row wise...
 let testCSVData = CsvHelper.readCsv('src/testdata/logindata.csv');
 for (let row of testCSVData) {
-    test(`login to app with invalid credentials with CSV data - ${row.username} - ${row.password}`, async ({ loginPage, homePage }) => {
+    test(`@regression login to app with invalid credentials with CSV data - ${row.username} - ${row.password}`, async ({ loginPage, homePage }) => {
 
         meta({ priority: 'P2', severity: 'major', owner: 'Ajit', story: 'US103', epic: 'ep301', feature: 'F32', issue: 'bug36' });
         await testData(testCSVData, 'Invalid Login Data');
@@ -85,7 +85,7 @@ for (let row of testCSVData) {
 //DD_2: read xlsx data directly fromn the excel file and loop the test method row wise...
 let testExcelData = ExcelHelper.readExcel('src/testdata/opencarttestdata.xlsx', 'login');
 for (let row of testExcelData) {
-    test(`login to app with invalid credentials with Excel Data- ${row.username} - ${row.password}`, async ({ loginPage, homePage }) => {
+    test(`login to app with invalid credentials with Excel Data - ${row.username} - ${row.password} `, async ({ loginPage, homePage }) => {
         meta({ priority: 'P2', severity: 'major', owner: 'Ajit', story: 'US103', epic: 'ep301', feature: 'F32', issue: 'bug36' });
         await testData(testExcelData, 'Invalid Login Data');
 
@@ -99,7 +99,7 @@ for (let row of testExcelData) {
 //DD_3: read JSON data directly fromn the JSON file and loop the test method row wise...
 let testJSONData = JsonHelper.readJson('src/testdata/logindata.json');
 for (let row of testJSONData) {
-    test(`login to app with invalid credentials with JSON Data- ${row.username} - ${row.password}`, async ({ loginPage, homePage }) => {
+    test(`login to app with invalid credentials with JSON Data - ${row.username} - ${row.password} `, async ({ loginPage, homePage }) => {
         meta({ priority: 'P2', severity: 'major', owner: 'Ajit', story: 'US103', epic: 'ep301', feature: 'F32', issue: 'bug36' });
         await testData(testJSONData, 'Invalid Login Data');
 
@@ -110,11 +110,11 @@ for (let row of testJSONData) {
 
 
 //common features test:
-test('@sanity App logo exists on Login Page', async ({ basePage }) => {
+test('@smoke App logo exists on Login Page', async ({ basePage }) => {
     expect(await basePage.isLogoVisible()).toBeTruthy();
 });
 
-test('@sanity Search Box exists on Login Page', async ({ basePage }) => {
+test('@smoke Search Box exists on Login Page', async ({ basePage }) => {
     expect(await basePage.isSearchBoxVisible()).toBeTruthy();
 });
 
